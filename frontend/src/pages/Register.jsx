@@ -9,7 +9,7 @@ export default function Register() {
     phonenumber: "",
     password: "",
   });
-  const [isSuccess, setIsSuccess] = useState(true);
+  const [isSuccess, setIsSuccess] = useState(false);
   const [timer, setTimer] = useState(60);
   const [isCounting, setIsCounting] = useState(false);
 
