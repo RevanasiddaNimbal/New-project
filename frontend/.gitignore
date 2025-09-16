@@ -8,10 +8,18 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+<<<<<<< HEAD
 dist
 dist-ssr
 *.local
 .env
+=======
+.env
+dist
+dist-ssr
+*.local
+
+>>>>>>> ccf29cd (added frontend)
 
 
 # Editor directories and files

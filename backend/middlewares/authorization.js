@@ -5,14 +5,15 @@ const authMiddleware = async (req, res, next) => {
     const token =
       req.header("x-verify-token") ||
       req.cookies?.token ||
-      req.cookies?.verifyToken;
+      req.cookies?.verifytoken;
+
     if (!token) {
       return res.status(401).json({
         error: "No token provided.",
       });
     }
 
-    const decode = await jwt.verify(token, process.env.SECRET_KEY);
+    const decode = jwt.verify(token, process.env.SECRET_KEY);
     req.email = decode.email;
 
     next();

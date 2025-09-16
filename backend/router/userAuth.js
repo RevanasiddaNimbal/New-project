@@ -16,9 +16,9 @@ const {
 router.post("/login", login);
 router.post("/register", register);
 router.post("/forgot-password", forgetpassword);
-router.post("/verify", authMiddleware, varifyUser);
+router.post("/verify-otp", authMiddleware, varifyUser);
 router.post("/resend-otp", authMiddleware, otpMiddleware, resendOtp);
-router.post("/reset-passaword", authMiddleware, resetpassword);
+router.post("/reset-password", authMiddleware, resetpassword);
 router.post("/logout", authMiddleware, logout);
 router.get("/users", showUsers);
 

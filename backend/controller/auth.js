@@ -8,6 +8,7 @@ exports.register = async (req, res, next) => {
     const { name, email, phonenumber, password } = req.body;
     if (!name || !email || !phonenumber || !password) {
       return res.status(400).json({
+        success: false,
         error: "All required fields must be proveded.",
       });
     }
@@ -15,6 +16,7 @@ exports.register = async (req, res, next) => {
     const user = await User.checkUserByEmail(email);
     if (user && user.error) {
       return res.status(409).json({
+        success: false,
         error: user.error,
       });
     }
@@ -27,9 +29,10 @@ exports.register = async (req, res, next) => {
       password: hashpassword,
     });
     if (result.error) {
-      return res
-        .status(500)
-        .json({ error: "Failed to register user. Please try again." });
+      return res.status(500).json({
+        success: false,
+        error: "Failed to register user. Please try again.",
+      });
     }
 
     req.user = { email };
@@ -47,11 +50,12 @@ exports.register = async (req, res, next) => {
       res.cookie("verifytoken", verifyToken, {
         httpOnly: true,
         secure: false,
-        sameSite: "strict",
+        sameSite: "lax",
         maxAge: 5 * 60 * 1000,
       });
 
       res.status(201).json({
+        success: true,
         message:
           " User registered successfully. Please verify your account using the OTP sent to your email.",
         user: result,
@@ -71,18 +75,21 @@ exports.varifyUser = async (req, res, next) => {
     const user = await User.getUserByEmail(email);
     if (user.error) {
       return res.status(404).json({
+        success: false,
         error: "User not found.",
       });
     }
 
     if (user.otp !== otp) {
       return res.status(400).json({
+        success: false,
         error: "Invalid OTP. Please enter again.",
       });
     }
 
     if (new Date() > new Date(user.otp_expire_at)) {
       return res.status(400).json({
+        success: false,
         error: "OTP has expired.Please requrst a new one.",
       });
     }
@@ -90,11 +97,13 @@ exports.varifyUser = async (req, res, next) => {
     const updateUser = await User.verifyUser(email);
     if (updateUser.error) {
       return res.status(500).json({
+        success: false,
         error: "Failed to verify user.Please try again.",
       });
     }
 
     res.status(200).json({
+      success: true,
       message: "Account verified successfully. You may now log in",
       user: updateUser,
     });
@@ -120,7 +129,10 @@ exports.login = async (req, res, next) => {
     const { email, password } = req.body;
     const result = await User.login(email, password);
     if (result.error) {
-      return res.status(401).json({ error: result.error });
+      return res.status(401).json({
+        success: false,
+        error: result.error,
+      });
     }
 
     const token = await jwt.sign(
@@ -135,11 +147,12 @@ exports.login = async (req, res, next) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: false,
-      sameSite: "strict",
+      sameSite: "lax",
       maxAge: 2 * 60 * 60 * 1000,
     });
 
     return res.status(200).json({
+      success: true,
       message: "login successful.",
       email: result.email,
       name: result.name,
@@ -156,12 +169,14 @@ exports.forgetpassword = async (req, res, next) => {
 
     if (newpassword !== confirm || !email) {
       return res.status(400).json({
+        success: false,
         error: "Email and password confirmation do not match.",
       });
     }
     const user = await User.getUserByEmail(email);
     if (user.error) {
       return res.status(404).json({
+        success: false,
         error: "User not found.",
       });
     }
@@ -170,11 +185,13 @@ exports.forgetpassword = async (req, res, next) => {
     const updatepass = await User.resetPassword({ newpassword: hash, email });
     if (updatepass.error) {
       return res.status(500).json({
+        success: false,
         error: "Failed to reset password. Please try again.",
       });
     }
 
     res.status(200).json({
+      success: true,
       message: "Password has been reset successfully.",
       User_email: email,
     });
@@ -185,19 +202,19 @@ exports.forgetpassword = async (req, res, next) => {
 
 exports.resetpassword = async (req, res, next) => {
   try {
-    const { oldpassword, newpassword } = req.body;
-    const email = req.email;
+    const { oldpassword, newpassword, email } = req.body;
 
     const user = await User.getUserByEmail(email);
     if (user.error) {
       return res.status(404).json({
+        success: false,
         error: "User not found.",
       });
     }
     const isMatch = await bcrypt.compare(oldpassword, user.password);
     if (!isMatch) {
       return res.status(400).json({
-        error: "The old password you entered is incorrect.",
+        error: "The current password you entered is incorrect.",
       });
     }
     const hash = await bcrypt.hash(newpassword, 10);

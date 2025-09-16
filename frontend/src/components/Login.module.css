@@ -1,0 +1,145 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url("https://wallpapers.com/images/hd/dark-blue-background-pkhkmfpeg4222pyh.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.624);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  width: 350px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  z-index: 5;
+  animation: scaleUp 0.3s ease-in-out;
+  height: 25em;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form input {
+  padding: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.606);
+  border: 1px solid rgba(255, 255, 255, 0.843);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+}
+
+.form input:focus {
+  border-color: #70a1f7e6;
+  outline: none;
+}
+
+.hidepassword {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.hidepassword input {
+  width: 100%;
+  padding-right: 2.5rem;
+}
+
+.hideicon {
+  position: absolute;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.hidepassword input[type="text"] + .hideicon {
+  background-image: url("https://cdn-icons-png.flaticon.com/128/9055/9055153.png");
+}
+
+.hidepassword input[type="password"] + .hideicon {
+  background-image: url("https://cdn-icons-png.flaticon.com/128/4298/4298899.png");
+}
+.forgotPasswordWrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin: -5px 7px 1px 0;
+}
+
+.forgotPassword {
+  font-size: 14px;
+  color: #1c7ae5;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.forgotPassword:hover {
+  text-decoration: underline;
+  color: #0e6bee;
+}
+
+.form button {
+  background: #2575fc;
+  color: white;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.form button:hover {
+  transform: scale(1.03);
+  background: #1b5fcf;
+}
+
+.registerText {
+  padding: 20px;
+  margin-top: 12px;
+  font-size: medium;
+}
+.registerLink {
+  margin: 2px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+  padding: 2px;
+  color: rgba(0, 0, 255, 0.745);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+}
+.registerLink:hover {
+  transform: scale(1.04);
+}
+@keyframes scaleUp {
+  from {
+    transform: scale(0.95);
+    opacity: 0.2;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

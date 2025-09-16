@@ -8,7 +8,16 @@ const authentication = require("./router/userAuth");
 
 const port = process.env.PORT || 5000;
 
+<<<<<<< HEAD
 app.use(cors());
+=======
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
+>>>>>>> ccf29cd (added frontend)
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());

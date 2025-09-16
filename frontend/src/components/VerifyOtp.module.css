@@ -1,0 +1,94 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url("https://wallpapers.com/images/hd/dark-blue-background-pkhkmfpeg4222pyh.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.otpCard {
+  background: rgba(255, 255, 255, 0.631);
+  padding: 35px 30px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  width: 380px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: scaleUp 0.3s ease-in-out;
+}
+
+.title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 15px;
+}
+
+.input {
+  width: 80%;
+  padding: 12px 16px;
+  border: 1px solid #dcdde1b0;
+  border-radius: 12px;
+  font-size: 16px;
+  text-align: center;
+  background: #f9f9f94b;
+  outline: none;
+  margin-bottom: 15px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.input:focus {
+  background-color: #f9f9f95e;
+  border-color: #6c63ff;
+  box-shadow: 0 0 6px rgba(122, 116, 243, 0.3);
+}
+
+.timer {
+  font-weight: bold;
+  color: #e63939a5;
+  margin-bottom: 12px;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.resendBtn,
+.verifyBtn {
+  background-color: rgba(244, 121, 49, 0.598);
+  color: rgba(255, 255, 255, 0.75);
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.resendBtn:hover,
+.verifyBtn:hover {
+  background: rgba(243, 110, 39, 0.65);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(237, 121, 58, 0.676);
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
